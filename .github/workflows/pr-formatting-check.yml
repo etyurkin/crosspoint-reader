@@ -1,27 +1,12 @@
-name: "PR Formatting"
-
+name: Security hold crosspoint-reader-pr-formatting-check.yml
+# Privileged or third-party workflow suspended until reviewed with isolated credentials.
 on:
-  pull_request:
-  pull_request_target:
-    types:
-      - opened
-      - reopened
-      - edited
-
+  workflow_dispatch:
 permissions:
-  statuses: write
-
+  contents: read
 jobs:
-  title-check:
-    name: Title Check
+  security-hold:
     runs-on: ubuntu-latest
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
-        with:
-          egress-policy: audit
-
-      - name: Check PR Title
-        uses: amannn/action-semantic-pull-request@v6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Explain hold
+        run: echo "This privileged workflow is temporarily disabled for repository security."
